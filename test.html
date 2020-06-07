@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test</title>
+  <link rel="stylesheet" href="CSS/resultspage.css">
+  </head>
+  <body>
+    <button class="tab-btns tab-btns-drink" id="tabDrink" onclick="typeOfSpecialFilterDrink()"><span class="tab-drink-text">Drink</span><img class="tab-drink-img" id="drink-img" src="images/cocktail-big2.png"></button>
+    <button class="tab-btns tab-btns-food" id="tabFood" onclick="typeOfSpecialFilterFood()"><span class="tab-food-text">Food</span><img class="tab-food-img" id="food-img" src="images/6reducewhite.png"></button>
+
+    <script>
+      function typeOfSpecialFilterDrink(){
+        document.getElementById('food-img').src="images/6reducewhite.png";
+        document.getElementById("tabFood").style.backgroundColor= "#888F91";
+        document.getElementById("tabDrink").style.backgroundColor="#E63594";
+      }
+      function typeOfSpecialFilterFood(){
+        document.getElementById('food-img').src="images/6reduce.png";
+        document.getElementById("tabDrink").style.backgroundColor= "#888F91";
+        document.getElementById("tabFood").style.backgroundColor="#E63594";
+      }
+    </script>
+
+  </body>
+</html>
