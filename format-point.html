@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <center>
+    <textarea id="coords" name="w3review" rows="43" cols="50" placeholder="
+    Example
+    
+    POINT (-33.7994919 151.2854185)
+    POINT (-33.7975857 151.2851551)
+    POINT (-33.7972805 151.286721)
+    POINT (-33.8653232 151.2089395)
+    POINT (-33.7983283 151.2878721)
+    POINT (-33.8741043 151.273435)
+    POINT (-33.7979906 151.2882423)
+    POINT (-33.8765072 151.2056416)
+    POINT (-33.8723047 151.2571646)
+    POINT (-33.8779272 151.2434262)
+    -36.8872613,174.7745644
+    -33.875553, 151.257890
+    -38.873103, 149.257034
+    -43.873103, 161.257034
+    POINT(151.2851718 -33.7961619)
+    POINT(151.2882695 -33.7976305)
+    POINT(151.2860761 -33.7998512)
+    
+    
+    =
+    
+    POINT (151.2854185 -33.7994919)
+    POINT (151.2851551 -33.7975857)
+    POINT (151.286721 -33.7972805)
+    POINT (151.2089395 -33.8653232)
+    POINT (151.2878721 -33.7983283)
+    POINT (151.273435 -33.8741043)
+    POINT (151.2882423 -33.7979906)
+    POINT (151.2056416 -33.8765072)
+    POINT (151.2571646 -33.8723047)
+    POINT (151.2434262 -33.8779272)
+    POINT (174.7745644 -36.8872613)
+    POINT (151.257890 -33.875553)
+    POINT (149.257034 -38.873103)
+    POINT (161.257034 -43.873103)
+    POINT (151.2851718 -33.7961619)
+    POINT (151.2882695 -33.7976305)
+    POINT (151.2860761 -33.7998512)
+    
+"></textarea><br>
+    <button onclick="convert()">Convert</button>
+  </center>
+
+  <script>
+
+    function convert() {
+      var area = document.getElementById("coords");
+      var lines = area.value.replace(/\r\n/g, "\n").split("\n").filter(line => line);
+      console.log(lines);
+
+      // Clear the text ara
+      document.getElementById("coords").value = "";
+
+      var a = 0;
+      var linesLen = lines.length;
+      // For each line
+      for (a; a < linesLen; a++) {
+        console.log(lines[a]);
+
+        var firstNum = lines[a].substring(
+          lines[a].lastIndexOf("(") + 1,
+          lines[a].lastIndexOf(" ")
+        );
+
+        console.log(firstNum);
+
+        console.log(lines[a]);
+
+        var formattedCoords = "POINT (";
+        var firstNum = "";
+        var secondNum = "";
+
+        var regex = /[+-]?\d+(?:\.\d+)?/g;
+        var str = lines[a];
+
+        var match;
+        while (match = regex.exec(str)) {
+          console.log(match[0]);
+
+          if (firstNum == "") {
+            firstNum += match[0];
+          } else {
+            secondNum += match[0];
+          }
+          // formattedCoords += match[0] + " ";
+        }
+
+        console.log(formattedCoords + secondNum + " " + firstNum + ")");
+
+        //If start with negative
+        if (Math.sign(firstNum) == -1) {
+          document.getElementById("coords").value += formattedCoords + secondNum + " " + firstNum + ")" + "\n";
+        } else if (Math.sign(firstNum) == 1) {
+          document.getElementById("coords").value += formattedCoords + firstNum + " " + secondNum + ")" + "\n";
+        }
+      }
+
+
+      // var numbers = lines[a].match(/\d+/g).map(Number);
+      // console.log(numbers);
+
+
+      // var regex = /[+-]?\d+(?:\.\d+)?/g;
+
+      // var str = lines[a];
+
+      // var match;
+      // while (match = regex.exec(str)) {
+      //   console.log(match[0]);
+      // }
+    }
+  </script>
+</body>
+
+</html>
